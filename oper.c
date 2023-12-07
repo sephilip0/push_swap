@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+* ************************************************************************* */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   oper.c                                             :+:      :+:    :+:   */
@@ -10,16 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void 	ft_swapa(t_list **lst)
+void 	sa(t_stack_node **stack)
 {
-	t_list	*tmp;
-	t_list 	*tmp2;
+	t_stack_node	*tmp;
+	t_stack_node 	*tmp2;
 
-	if (ft_lstsize(t_list *lst) < 2)
-		return ;
-	tmp = *lst;
-	tmp2 = (*lst)->next;
-// delete and add?
-// OR rethread?
-	
+//	if (ft_stacksize(t_stack_node *stack) < 2)
+//		return
+	tmp = *stack;
+	tmp->next = (*stack)->next->next;
+	(*stack)->next = tmp;
+	(*stack) = tmp;
 }
