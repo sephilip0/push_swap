@@ -27,4 +27,15 @@ t_stack_node	*find_min(t_stack_node *stack);
 int	stacksize(t_stack_node *stack);
 void	printstack(t_stack_node *stack);
 
+void	sa(t_stack_node **stack, bool pt);
+void 	sb(t_stack_node **stack, bool pt);
+void	ss(t_stack_node **a, t_stack_node **b, bool pt);
+void	pa(t_stack_node **a, t_stack_node **b, bool pt);
+void	ra(t_stack_node **stack, bool pt);
+void	rb(t_stack_node **stack, bool pt);
+void	rr(t_stack_node **a, t_stack_node **b, bool pt);
+void	rra(t_stack_node **stack, bool pt);
+void	rrb(t_stack_node **stack, bool pt);
+void	rrr(t_stack_node **a, t_stack_node **b, bool pt);
+
 #endif // !

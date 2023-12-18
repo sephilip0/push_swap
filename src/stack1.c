@@ -52,7 +52,6 @@ void	appendstack(t_stack_node **stack, int n)
 
 t_stack_node	*find_last(t_stack_node *stack)
 {
-
 	if (!stack)
 		return (NULL);
 	while (stack->next != NULL)

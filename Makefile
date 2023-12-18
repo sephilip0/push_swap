@@ -18,7 +18,6 @@ SRC_PATH = src/
 OBJ_PATH = obj/
 
 SRC = extra.c oper.c push_swap.c stack1.c
-SRCS = $(addprefix $(SRC_PATH), $(SRC))
 
 OBJ = $(SRC:.c=.o)
 OBJS = $(addprefix $(OBJ_PATH), $(OBJ))
@@ -29,12 +28,17 @@ all: $(OBJ_PATH) $(NAME)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCS)
+#	PUTTING THE OBJECTS IN THEIR FOLDERS
+#	-c ==> don't link sorce file to executable, yet.
+#	$< ==> first prerequisite file, something.c
+#	$@ ==> the target, objects.o
 
 $(OBJ_PATH):
 	mkdir $(OBJ_PATH)
 
 $(NAME): $(OBJS)
 	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
+#	we link them here
 
 clean:
 	rm -rf $(OBJ_PATH)

@@ -1,4 +1,5 @@
 #include "push_swap.h"
+
 /*
 void	ft_initstack_a(t_stack_node **stack, int argc, char *argv[])
 {
@@ -30,16 +31,21 @@ int main(int argc, char *argv[])
 int main(void)
 {
 	t_stack_node *a;
-	t_stack_node *aprint;
+	t_stack_node *b;
 
 	a = NULL;
+	b = NULL;
 	appendstack(&a, 10);
-	printf("a->nbr: %d\n", a->next);
 	appendstack(&a, 11);
-	printf("a->nbr: %d\n", a->next);
 	appendstack(&a, 12);
-	printf("a->nbr: %d\n", a->next);
-	aprint = find_last(a);
-	printf("%d\n", aprint->nbr);
+	appendstack(&a, 13);
+	appendstack(&a, 14);
+	appendstack(&b, 1);
+	appendstack(&b, 2);
+	appendstack(&b, 3);
+	printstack(a);
+	printf("++++++++\n");
+	rra(&a, true);
+	printstack(a);
 	return (0);
 }
