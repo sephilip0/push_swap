@@ -23,6 +23,7 @@ OBJ = $(SRC:.c=.o)
 OBJS = $(addprefix $(OBJ_PATH), $(OBJ))
 
 INCS = -I ./includes
+LIB = ./includes/libft.a
 
 all: $(OBJ_PATH) $(NAME)
 
@@ -37,7 +38,7 @@ $(OBJ_PATH):
 	mkdir $(OBJ_PATH)
 
 $(NAME): $(OBJS)
-	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(FLAGS) $(OBJS) $(LIB) -o $(NAME)
 #	we link them here
 
 clean:

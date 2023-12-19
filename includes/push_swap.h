@@ -24,8 +24,14 @@ void	appendstack(t_stack_node **stack, int n);
 t_stack_node	*find_last(t_stack_node *stack);
 t_stack_node	*find_max(t_stack_node *stack);
 t_stack_node	*find_min(t_stack_node *stack);
-int	stacksize(t_stack_node *stack);
 void	printstack(t_stack_node *stack);
+int	instack(t_stack_node *stack, int nbr);
+int	stacksize(t_stack_node *stack);
+int	stacksorted(t_stack_node *stack);
+
+int	ft_initstack_a(t_stack_node **a, int argc, char *argv[]);
+void	error_stack();
+int	veradd(t_stack_node **stack, char **nbr);
 
 void	sa(t_stack_node **stack, bool pt);
 void 	sb(t_stack_node **stack, bool pt);
@@ -37,5 +43,8 @@ void	rr(t_stack_node **a, t_stack_node **b, bool pt);
 void	rra(t_stack_node **stack, bool pt);
 void	rrb(t_stack_node **stack, bool pt);
 void	rrr(t_stack_node **a, t_stack_node **b, bool pt);
+
+char	**ft_split(char const *s, char c);
+long	ft_atol(const char *nptr);
 
 #endif // !
