@@ -1,3 +1,5 @@
+#include "push_swap.h"
+
 long	ft_atol(const char *nptr)
 {
 	char	*nbr;
@@ -23,4 +25,11 @@ long	ft_atol(const char *nptr)
 	if (nbr[i] && (nbr[i] < 48 || nbr[i] > 57))
 		return (10000000000);
 	return (sig * res);
+}
+
+int	ft_mod(int n)
+{
+	if (n < 0)
+		n *= -1;
+	return (n);
 }

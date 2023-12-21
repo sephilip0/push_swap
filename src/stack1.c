@@ -96,7 +96,12 @@ void	printstack(t_stack_node *stack)
 {
 	while (stack != NULL)
 	{
-		printf("%d\n", stack->nbr);
+		printf("me: %p\n", stack);
+		printf("nbr: %d ", stack->nbr);
+		printf("index %d ", stack->index);
+		printf("above: %d ", stack->above_median);
+		printf("price: %d ", stack->push_cost);
+		printf("target: %p\n", stack->target_node);
 		stack = stack->next;
 	}
 }
