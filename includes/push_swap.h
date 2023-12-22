@@ -34,6 +34,7 @@ void	error_stack();
 int	veradd(t_stack_node **stack, char **nbr);
 void	sort_three(t_stack_node **a);
 void	sort_stack(t_stack_node **a, t_stack_node **b);
+void	last_resort(t_stack_node **a);
 
 void	prepare_push_f(t_stack_node **a, t_stack_node **b);
 void	prepare_push_b(t_stack_node **a, t_stack_node **b);

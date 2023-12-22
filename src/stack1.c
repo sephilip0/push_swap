@@ -113,7 +113,7 @@ int	instack(t_stack_node *stack, int nbr)
 		if (stack->nbr == nbr)
 		{
 			// delete
-			printf("nbr: %d\n", nbr);
+//			printf("nbr: %d\n", nbr);
 			return (1);
 		}
 		stack = stack->next;

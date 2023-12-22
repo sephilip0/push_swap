@@ -21,16 +21,25 @@ int	ft_initstack_a(t_stack_node **a, int argc, char *argv[])
 	return (error);
 }
 
-void	error_nbr()
+void	free_stack(t_stack_node **stack)
 {
+	t_stack_node	*tmp;
 
+	while (*stack)
+	{
+		tmp = (*stack)->next;
+		free(*stack);
+		*stack = tmp;
+	}
+	*stack = 0;
 }
 
-void	error_stack()
+void	error_stack(t_stack_node **stack)
 {
+	if (*stack)
+		free_stack(stack);
 	printf("Error\n");
 	exit(1);
-	//free
 }
 
 int	veradd(t_stack_node **stack, char **nbr)
@@ -46,14 +55,14 @@ int	veradd(t_stack_node **stack, char **nbr)
 		if (a < -2147483638 || a > 2147483647)
 		{
 			//error_stack(stack);
-			error_stack();
+			error_stack(stack);
 			return (1);
 		}
 		if (!instack(*stack, a)) //no typecast yet
 			appendstack(stack, a);
 		else
 		{
-			error_stack();
+			error_stack(stack);
 			return (1);
 		}
 		i++;
@@ -80,46 +89,45 @@ void	sort_stack(t_stack_node **a, t_stack_node **b)
 	if (stacksize(*a) > 4)
 		pb(a, b, true);
 	pb(a, b, true);
-//	printstack(*a);
-//	printf("===========\n");
 	while (stacksize(*a) > 3)
 	{
 		update_stack(a);
 		update_stack(b);
 		set_target_l(a, b);
 		set_price(a, b);
-//		printf("A: +++++++++++++++++++\n");
-//		printstack(*a);
-//		printf("B: +++++++++++++++++++\n");
-//		printstack(*b);
 		prepare_push_f(a, b);
 		pb(a, b, true);
 	}
 	sort_three(a);
-//	printstack(*a);
-//	printf("m.m.m.m.m.m.m.m.m.m.m.m.m.m.m.m.m\n");
-//	printf("SIZE %d\n", stacksize(*b));
 	while (stacksize(*b) >= 1)
 	{
 		update_stack(a);
 		update_stack(b);
-		// b, a 
 		set_target_h(b, a);
 		set_price(b, a);
-//		printf("A: +.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.\n");
-//		printstack(*a);
-//		printf("B: +.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.\n");
-//		printstack(*b);
 		prepare_push_b(a, b);
 		pa(a, b, true);
 	}
-//	printf("A: ========================\n");
-//	printstack(*a);
-//	printf("b: ========================\n");
-//	printstack(*b);
-//	printf("fim: ========================\n");
-	while (!(stacksorted(*a)))
-		ra(a, true);
+	if (!(stacksorted(*a)))
+		last_resort(a);
+}
+
+void	last_resort(t_stack_node **a)
+{
+	t_stack_node	*min;
+
+	update_stack(a);
+	min = find_min(*a);
+	if (min->above_median == true)
+	{
+		while (!(stacksorted(*a)))
+			ra(a, true);
+	}
+	else
+	{
+		while (!(stacksorted(*a)))
+			rra(a, true);
+	}
 }
 
 //put both on top
@@ -390,6 +398,8 @@ int main(int argc, char *argv[])
 
 	a = NULL;
 	b = NULL;
+	if (argc == 1 || (argc == 2 && !argv[1][0]))
+		return (1);
 	error = ft_initstack_a(&a, argc, argv);
 	if (error)
 		return (1);
@@ -401,6 +411,7 @@ int main(int argc, char *argv[])
 		else
 			sort_stack(&a, &b);
 	}
+	free_stack(&a);
 //	printstack(a);
 	return(0);
 }
