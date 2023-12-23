@@ -39,12 +39,12 @@ void	last_resort(t_stack_node **a);
 void	prepare_push_f(t_stack_node **a, t_stack_node **b);
 void	prepare_push_b(t_stack_node **a, t_stack_node **b);
 
-t_stack_node	*cheapest_node(t_stack_node **a);
+t_stack_node	*cheapest_node(t_stack_node *a);
 void	set_target_l(t_stack_node **a, t_stack_node **b);
 void	set_target_h(t_stack_node **a, t_stack_node **b);
-void	set_price(t_stack_node **a, t_stack_node **b);
-int	find_price(t_stack_node *a, t_stack_node *b, int sizea);
-void	update_stack(t_stack_node **stack);
+void	set_price(t_stack_node *a, t_stack_node *b);
+//int	find_price(t_stack_node *a, t_stack_node *b, int sizea);
+void	update_stack(t_stack_node *stack);
 
 void	sa(t_stack_node **stack, bool pt);
 void 	sb(t_stack_node **stack, bool pt);

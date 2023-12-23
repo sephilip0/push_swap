@@ -91,20 +91,20 @@ void	sort_stack(t_stack_node **a, t_stack_node **b)
 	pb(a, b, true);
 	while (stacksize(*a) > 3)
 	{
-		update_stack(a);
-		update_stack(b);
+		update_stack(*a);
+		update_stack(*b);
 		set_target_l(a, b);
-		set_price(a, b);
+		set_price(*a, *b);
 		prepare_push_f(a, b);
 		pb(a, b, true);
 	}
 	sort_three(a);
 	while (stacksize(*b) >= 1)
 	{
-		update_stack(a);
-		update_stack(b);
+		update_stack(*a);
+		update_stack(*b);
 		set_target_h(b, a);
-		set_price(b, a);
+		set_price(*b, *a);
 		prepare_push_b(a, b);
 		pa(a, b, true);
 	}
@@ -116,7 +116,7 @@ void	last_resort(t_stack_node **a)
 {
 	t_stack_node	*min;
 
-	update_stack(a);
+	update_stack(*a);
 	min = find_min(*a);
 	if (min->above_median == true)
 	{
@@ -137,7 +137,7 @@ void	prepare_push_f(t_stack_node **a, t_stack_node **b)
 	t_stack_node	*to;
 
 //	if (stacksize(*a) < 2)
-	from = cheapest_node(a);
+	from = cheapest_node(*a);
 	to = from->target_node;
 	while (*a != from)
 	{
@@ -168,7 +168,7 @@ void	prepare_push_b(t_stack_node **a, t_stack_node **b)
 	t_stack_node	*to;
 
 //	if (stacksize(*a) < 2)
-	from = cheapest_node(b);
+	from = cheapest_node(*b);
 	to = from->target_node;
 	while (*b != from)
 	{
@@ -199,25 +199,24 @@ void	prepare_push_b(t_stack_node **a, t_stack_node **b)
 
 
 
-t_stack_node	*cheapest_node(t_stack_node **a)
+t_stack_node	*cheapest_node(t_stack_node *a)
 {
-	t_stack_node	*tmp;
 	t_stack_node	*cheapest;
 	int	cost;
 
-	tmp = *a;
-	cost = (*a)->push_cost;
-	cheapest = (*a);
-	while (*a)
+//	if (!a)
+//		return (NULL);
+	cost = a->push_cost;
+	cheapest = a;
+	while (a)
 	{
-		if ((*a)->push_cost < cost)
+		if (a->push_cost < cost)
 		{
-			cost = (*a)->push_cost;
-			cheapest = (*a);
+			cost = a->push_cost;
+			cheapest = a;
 		}
-		*a = (*a)->next;
+		a = a->next;
 	}
-	*a = tmp;
 //	printf("chapest: %d\n", cheapest->nbr);
 	return (cheapest);
 }
@@ -235,7 +234,6 @@ void	set_target_l(t_stack_node **a, t_stack_node **b)
 	tmp_b = *b;
 	while (*a)
 	{
-//		printf("\nanalise: %d\n", (*a)->nbr);
 		(*a)->target_node = NULL;
 		dif = stksize;
 		*b = tmp_b;
@@ -243,21 +241,15 @@ void	set_target_l(t_stack_node **a, t_stack_node **b)
 		{
 			//this could be lower/higher than max_int
 			dif2 = ft_mod((*b)->nbr - (*a)->nbr);
-//			printf("dif: %ld dif2: %ld\n", dif, dif2);
-//			printf("b: %d a: %d\n", (*b)->nbr, (*a)->nbr);
 			if (((*b)->nbr < (*a)->nbr) && (dif > dif2))
 			{
-//				printf("DONE\n");
 				(*a)->target_node = (*b);
 				dif = dif2;
 			}
-//			printf("now_target: %p\n", (*a)->target_node);
 			(*b) = (*b)->next;
 		}
 		if ((*a)->target_node == NULL)
 			(*a)->target_node = find_max(tmp_b);
-		//dangerous putting find_max(*b)
-//		printf("final_target: %p\n", (*a)->target_node);
 		(*a) = (*a)->next;
 	}
 	*a = tmp_a;
@@ -305,6 +297,29 @@ void	set_target_h(t_stack_node **a, t_stack_node **b)
 	*b = tmp_b;
 }
 
+
+void	set_price(t_stack_node *a, t_stack_node *b)
+{
+	int	size_a;
+	int	size_b;
+
+	size_a = stacksize(a);
+	size_b = stacksize(b);
+	while(a)
+	{
+		a->push_cost = a->index;
+		if (!(a->above_median))
+			a->push_cost = size_a - (a->index);
+		if (a->target_node->above_median)
+			a->push_cost += a->target_node->index;
+		else
+			a->push_cost += size_b - (a->target_node->index);
+		a = a->next;
+	}
+}
+
+
+/*
 //NOW WE NEED SOMETHING TO SET PRICE AND FIND CHEAPEST
 void	set_price(t_stack_node **a, t_stack_node **b)
 {
@@ -321,7 +336,6 @@ void	set_price(t_stack_node **a, t_stack_node **b)
 	}
 	*a = tmp;
 }
-
 // NEED AN UPDATED INDEX
 int	find_price(t_stack_node *a, t_stack_node *b, int sizea)
 {
@@ -358,35 +372,32 @@ int	find_price(t_stack_node *a, t_stack_node *b, int sizea)
 //	printf("target_cpy: %d\n", target_cpy);
 	index = ft_mod(ind_cpy - index) + ft_mod(target_cpy - index_target);
 	return (index);
-}
+}*/
 
-void	update_stack(t_stack_node **stack)
+void	update_stack(t_stack_node *stack)
 {
 	int	median;
 	int	index;
-	t_stack_node	*first;
 
-	index = 1;
-	median = stacksize(*stack) / 2;
-	if (stacksize(*stack) % 2 == 1)
+	index = 0;
+	median = stacksize(stack) / 2;
+	if (stacksize(stack) % 2 == 1)
 		median++;
-	first = *stack;
-	while (*stack)
+	while (stack)
 	{
 		if (median)
 		{
-			(*stack)->above_median = true;
+			stack->above_median = true;
 			median--;
 		}
 		else
-			(*stack)->above_median = false;
-		(*stack)->index = index;
+			stack->above_median = false;
+		stack->index = index;
 		//printf("index: %d\n", (*stack)->index);
 		//printf("abmed: %d\n", (*stack)->above_median);
 		index++;
-		*stack = (*stack)->next;
+		stack = stack->next;
 	}
-	*stack = first;
 }
 
 
