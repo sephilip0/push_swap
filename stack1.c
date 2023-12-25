@@ -11,23 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-/*
-t_stack_node	*stacknew(int *number)
-{
-	t_stack_node	*new;
-
-	new = (malloc(sizeof(t_stack_node)));
-	if (new == NULL)
-		return (NULL);
-	new->nbr = number;
-//	new->index = ?;
-	new->push_cost = MAX_INT;
-	new->above_median = false;
-	new->cheapest = false;
-	new->target_node = NULL;
-	new->next = NULL;
-	return (new);
-}*/
 
 void	appendstack(t_stack_node **stack, int n)
 {
