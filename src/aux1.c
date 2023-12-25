@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack.c                                              :+:      :+:    :+:   */
+/*   aux1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sephilip <sephilip@student.42lisboa.c      +#+  +:+       +#+        */
+/*   By: sephilip <sephlip@student.42lisboa.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 15:35:31 by sephilip          #+#    #+#             */
-/*   Updated: 2023/12/04 16:44:14 by sephilip         ###   ########.fr       */
+/*   Created: 2023/12/25 20:13:27 by sephilip          #+#    #+#             */
+/*   Updated: 2023/12/25 21:05:05 by sephilip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 void	appendstack(t_stack_node **stack, int n)
 {
@@ -74,7 +74,6 @@ t_stack_node	*find_min(t_stack_node *stack)
 	return (min);
 }
 
-// PRINTF USAGE
 void	printstack(t_stack_node *stack)
 {
 	while (stack != NULL)
@@ -88,88 +87,3 @@ void	printstack(t_stack_node *stack)
 		stack = stack->next;
 	}
 }
-
-int	instack(t_stack_node *stack, int nbr)
-{
-	while (stack != NULL)
-	{
-		if (stack->nbr == nbr)
-		{
-			// delete
-//			printf("nbr: %d\n", nbr);
-			return (1);
-		}
-		stack = stack->next;
-	}
-	return (0);
-}
-
-int	stacksize(t_stack_node *stack)
-{
-	int	len;
-
-	len = 0;
-	while (stack != NULL)
-	{
-		stack = stack->next;
-		len++;
-	}
-	return (len);
-}
-
-int	stacksorted(t_stack_node *stack)
-{
-	while (stack->next)
-	{
-		if (stack->next->nbr < stack->nbr)
-			return (0);
-		stack = stack->next;
-	}
-	return (1);
-}
-
-/*void	stackdel_front(t_stack_node **stack)
-{
-	t_stack_node	*first;
-
-//no verify yet
-	first = *stack;
-	*stack = (*stack)->next;
-	free(first);
-}
-
-void	stackadd_back(t_stack_node **stack, t_stack_node *new)
-{
-	t_stack_node	*tmp;
-
-	if (new == NULL)
-		return ;
-	if (*stack == NULL)
-	{
-		*stack = new;
-		return ;
-	}
-	tmp = *stack;
-	while (tmp->next != NULL)
-	{
-		tmp = tmp->next;
-	}
-	new->prev = tmp;
-	tmp->next = new;
-}
-
-void	stackadd_front(t_stack_node **stack, t_stack_node *new)
-{
-	if (new == NULL)
-		return ;
-	if (stack == NULL)
-	{
-		*stack = new;
-		return ;
-	}
-//verify
-	new->next = *stack;
-	(*stack)->prev = new;
-	*stack = new;
-}*/
-

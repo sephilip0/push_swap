@@ -6,7 +6,7 @@
 #    By: sephilip <sephlip@student.42lisboa.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/12 17:09:05 by sephilip          #+#    #+#              #
-#    Updated: 2023/09/25 14:35:13 by sephilip         ###   ########.fr        #
+#    Updated: 2023/12/25 21:18:05 by sephilip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CFLAGS = -Wall -Wextra -Werror
 SRC_PATH = src/
 OBJ_PATH = obj/
 
-SRC = extra.c oper.c push_swap.c stack1.c
+SRC = aux1.c aux2.c extra.c main.c oper1.c oper2.c oper3.c push_swap.c pushing.c start.c
 
 OBJ = $(SRC:.c=.o)
 OBJS = $(addprefix $(OBJ_PATH), $(OBJ))
