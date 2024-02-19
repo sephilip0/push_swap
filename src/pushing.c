@@ -41,8 +41,7 @@ void	movea_b(t_stack_node **a, t_stack_node **b)
 			update_stack(*a);
 		}
 	}
-	else if (!(from->above_median)
-		&& !(from->target_node->above_median))
+	else if (!(from->above_median) && !(from->target_node->above_median))
 	{
 		while (*b != from->target_node && *a != from)
 		{

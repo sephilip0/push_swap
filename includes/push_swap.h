@@ -24,8 +24,11 @@ int	ft_initstack_a(t_stack_node **a, int argc, char *argv[]);
 int	veradd(t_stack_node **stack, char **nbr);
 void	prepare_push(t_stack_node **stack, t_stack_node *top_node, char stack_name);
 void	free_stack(t_stack_node **stack);
-void	error_stack(t_stack_node **stack);
+void	error_stack(t_stack_node **stack, char **mat);
 
+//FREE
+char	**ft_frees(char **mat);
+int	count_sent(char **mat);
 
 //AUXILIARY
 void	appendstack(t_stack_node **stack, int n);

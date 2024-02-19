@@ -6,7 +6,7 @@
 /*   By: sephilip <sephlip@student.42lisboa.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 20:18:42 by sephilip          #+#    #+#             */
-/*   Updated: 2023/12/25 20:57:24 by sephilip         ###   ########.fr       */
+/*   Updated: 2024/02/19 16:18:04 by sephilip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	ft_initstack_a(t_stack_node **a, int argc, char *argv[])
 	int		error;
 
 	i = 2;
+	mat = NULL;
 	error = 0;
 	if (argc == 2)
 	{
@@ -27,6 +28,8 @@ int	ft_initstack_a(t_stack_node **a, int argc, char *argv[])
 	}
 	if (argc > 2)
 		error = veradd(a, &argv[i - 1]);
+	if (mat)
+		ft_frees(mat);
 	return (error);
 }
 
@@ -43,14 +46,14 @@ int	veradd(t_stack_node **stack, char **nbr)
 		a = ft_atol(nbr[i]);
 		if (a < -2147483638 || a > 2147483647)
 		{
-			error_stack(stack);
+			error_stack(stack, nbr);
 			return (1);
 		}
 		if (!instack(*stack, a))
 			appendstack(stack, a);
 		else
 		{
-			error_stack(stack);
+			error_stack(stack, nbr);
 			return (1);
 		}
 		i++;
@@ -94,10 +97,11 @@ void	free_stack(t_stack_node **stack)
 	*stack = 0;
 }
 
-void	error_stack(t_stack_node **stack)
+void	error_stack(t_stack_node **stack, char **mat)
 {
 	if (*stack)
 		free_stack(stack);
+	ft_frees(mat);
 	write(2, "Error\n", 6);
 	exit(1);
 }
