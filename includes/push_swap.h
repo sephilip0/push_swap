@@ -31,7 +31,7 @@ char	**ft_frees(char **mat);
 int	count_sent(char **mat);
 
 //AUXILIARY
-void	appendstack(t_stack_node **stack, int n);
+int	appendstack(t_stack_node **stack, int n);
 t_stack_node	*find_last(t_stack_node *stack);
 t_stack_node	*find_max(t_stack_node *stack);
 t_stack_node	*find_min(t_stack_node *stack);
@@ -72,5 +72,9 @@ int	ft_mod(int n);
 
 void	printstack(t_stack_node *stack);
 
+
+int	ft_countwords(char *s, char c);
+int	ft_sizeword(char *s, char c, int i);
+char	**ft_free(char **mat, int j);
 
 #endif // !

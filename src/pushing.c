@@ -25,7 +25,6 @@ void	sort_three(t_stack_node **a)
 		sa(a, true);
 }
 
-//without pushb! should be in the last line
 void	movea_b(t_stack_node **a, t_stack_node **b)
 {
 	t_stack_node	*from;
@@ -85,7 +84,6 @@ void	sort_stack(t_stack_node **a, t_stack_node **b)
 	}
 	if (!(stacksorted(*a)))
 		last_resort(a);
-//	printstack(*a);
 }
 
 void	last_resort(t_stack_node **a)

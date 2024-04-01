@@ -18,44 +18,53 @@ int	ft_initstack_a(t_stack_node **a, int argc, char *argv[])
 	int		i;
 	int		error;
 
-	i = 2;
 	mat = NULL;
 	error = 0;
 	if (argc == 2)
 	{
-		mat = ft_split(argv[1], ' ');
+		mat = new_split(argv[1], ' ');
+	//	if (!mat)
+		//	return (1);
 		error = veradd(a, mat, 1);
 	}
+	i = 2;
 	if (argc > 2)
-		error = veradd(a, &argv[i - 1], 0);
+	{
+		while (i < argc)
+		{
+			mat = new_split(&argv[i - 1], ' ');	
+			error = veradd(a, mat, 0);
+			i++;
+		}
+	}
 	if (mat)
 		ft_frees(mat);
 	return (error);
 }
 
-//da merda se for *nbr[i], porque lemos o um ponter nulo
-//no typecast in (!instack(*stack, a)) yet
 int	veradd(t_stack_node **stack, char **nbr, int fr)
 {
 	long	a;
 	int		i;
+	int		error;
 
 	i = 0;
+	error = 0;
+	if (!nbr)
+		return (1);
 	while (nbr[i])
 	{
+		if (!*nbr[i])
+			error_stack(stack, nbr, 0);
 		a = ft_atol(nbr[i]);
 		if (a < -2147483648 || a > 2147483647)
-		{
 			error_stack(stack, nbr, fr);
-			return (1);
-		}
 		if (!instack(*stack, a))
 			appendstack(stack, a);
 		else
-		{
 			error_stack(stack, nbr, fr);
+		if (error != 0)
 			return (1);
-		}
 		i++;
 	}
 	return (0);

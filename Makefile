@@ -17,7 +17,7 @@ CFLAGS = -Wall -Wextra -Werror
 SRC_PATH = src/
 OBJ_PATH = obj/
 
-SRC = aux1.c aux2.c extra.c main.c oper1.c oper2.c oper3.c push_swap.c pushing.c start.c free.c
+SRC = aux1.c aux2.c extra.c main.c oper1.c oper2.c oper3.c push_swap.c pushing.c new_split.c start.c free.c
 
 OBJ = $(SRC:.c=.o)
 OBJS = $(addprefix $(OBJ_PATH), $(OBJ))
