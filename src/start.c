@@ -24,10 +24,10 @@ int	ft_initstack_a(t_stack_node **a, int argc, char *argv[])
 	if (argc == 2)
 	{
 		mat = ft_split(argv[1], ' ');
-		error = veradd(a, mat);
+		error = veradd(a, mat, 1);
 	}
 	if (argc > 2)
-		error = veradd(a, &argv[i - 1]);
+		error = veradd(a, &argv[i - 1], 0);
 	if (mat)
 		ft_frees(mat);
 	return (error);
@@ -35,7 +35,7 @@ int	ft_initstack_a(t_stack_node **a, int argc, char *argv[])
 
 //da merda se for *nbr[i], porque lemos o um ponter nulo
 //no typecast in (!instack(*stack, a)) yet
-int	veradd(t_stack_node **stack, char **nbr)
+int	veradd(t_stack_node **stack, char **nbr, int fr)
 {
 	long	a;
 	int		i;
@@ -44,16 +44,16 @@ int	veradd(t_stack_node **stack, char **nbr)
 	while (nbr[i])
 	{
 		a = ft_atol(nbr[i]);
-		if (a < -2147483638 || a > 2147483647)
+		if (a < -2147483648 || a > 2147483647)
 		{
-			error_stack(stack, nbr);
+			error_stack(stack, nbr, fr);
 			return (1);
 		}
 		if (!instack(*stack, a))
 			appendstack(stack, a);
 		else
 		{
-			error_stack(stack, nbr);
+			error_stack(stack, nbr, fr);
 			return (1);
 		}
 		i++;
@@ -97,11 +97,12 @@ void	free_stack(t_stack_node **stack)
 	*stack = 0;
 }
 
-void	error_stack(t_stack_node **stack, char **mat)
+void	error_stack(t_stack_node **stack, char **mat, int fr)
 {
 	if (*stack)
 		free_stack(stack);
-	ft_frees(mat);
+	if (fr)
+		ft_frees(mat);
 	write(2, "Error\n", 6);
 	exit(1);
 }
