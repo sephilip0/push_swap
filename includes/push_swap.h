@@ -1,6 +1,7 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+#include "./libft/libft.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -66,7 +67,7 @@ void	rra(t_stack_node **stack, bool pt);
 void	rrb(t_stack_node **stack, bool pt);
 void	rrr(t_stack_node **a, t_stack_node **b, bool pt);
 
-char	**ft_split(char const *s, char c);
+char	**new_split(char *s, char c);
 long	ft_atol(const char *nptr);
 int	ft_mod(int n);
 

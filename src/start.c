@@ -32,7 +32,7 @@ int	ft_initstack_a(t_stack_node **a, int argc, char *argv[])
 	{
 		while (i < argc)
 		{
-			mat = new_split(&argv[i - 1], ' ');	
+			mat = new_split(argv[i - 1], ' ');	
 			error = veradd(a, mat, 0);
 			i++;
 		}

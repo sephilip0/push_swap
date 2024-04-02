@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "libft.h"
 
-int	new_countwords(char *s, char c)
+static int	ft_countwords(char const *s, char c)
 {
 	char	*str;
 	int		i;
@@ -40,7 +40,7 @@ int	new_countwords(char *s, char c)
 	return (count);
 }
 
-int	new_sizeword(char *s, char c, int i)
+static int	ft_sizeword(char const *s, char c, int i)
 {
 	char	*p;
 	int		size;
@@ -55,7 +55,7 @@ int	new_sizeword(char *s, char c, int i)
 	return (size);
 }
 
-char	**new_free(char **mat, int j)
+static char	**ft_free(char **mat, int j)
 {
 	int	i;
 
@@ -69,7 +69,7 @@ char	**new_free(char **mat, int j)
 	return (NULL);
 }
 
-char	**new_split(char *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	int			i;
 	int			j;
@@ -96,3 +96,20 @@ char	**new_split(char *s, char c)
 	split[j] = 0;
 	return (split);
 }
+/*
+int	main()
+{
+	char	**mat;
+	int	i;
+
+	i = 0;
+	mat = ft_split("1 A  BB 1.23  CCC  33", ' ');
+	while (mat[i])
+	{
+		printf("%s\n", mat[i]);
+		i++;
+	}
+	free(mat);
+//	printf("%d\n", ft_countwords("    2 A.  ABC   A123 321    ", ' '));
+	return (0);
+}*/
