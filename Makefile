@@ -6,7 +6,7 @@
 #    By: sephilip <sephlip@student.42lisboa.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/12 17:09:05 by sephilip          #+#    #+#              #
-#    Updated: 2024/04/02 13:22:30 by sephilip         ###   ########.fr        #
+#    Updated: 2024/04/02 14:33:05 by sephilip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,11 +30,11 @@ LIBFT_PATH = ./include/libft
 all:	$(LIBFT) $(OBJ_PATH) $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(FLAGS) $(OBJS) $(LIB) -o $(NAME)
+	$(CC) $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 #	we link them here
 
 $(LIBFT):
-		make -s -C libft
+		make -C libft
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 		$(CC) $(CFLAGS) $(INCS) -o $@ -c $<

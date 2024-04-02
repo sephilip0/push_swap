@@ -78,19 +78,19 @@ char	**new_split(char *s, char c)
 	char		**split;
 
 	p = (char *)s;
-	split = malloc((ft_countwords(s, c) + 1) * sizeof(char *));
+	split = malloc((new_countwords(s, c) + 1) * sizeof(char *));
 	if (!p || !(split))
 		return (NULL);
 	i = 0;
 	j = -1;
-	while (++j < ft_countwords(s, c))
+	while (++j < new_countwords(s, c))
 	{
 		while (p[i] == c)
 			i++;
-		size = ft_sizeword(s, c, i);
+		size = new_sizeword(s, c, i);
 		split[j] = ft_substr(s, i, size);
 		if (!split[j])
-			return (ft_free(split, j));
+			return (new_free(split, j));
 		i += size;
 	}
 	split[j] = 0;

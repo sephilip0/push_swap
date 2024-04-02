@@ -20,7 +20,6 @@ void	ra(t_stack_node **stack, bool pt)
 	tmp = (*stack);
 	(*stack) = (*stack)->next;
 	tmp->next = NULL;
-	//change tmp after changing stack!
 	last = find_last(*stack);
 	last->next = tmp;
 	if (pt == true)

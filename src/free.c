@@ -12,29 +12,23 @@
 
 #include "../includes/push_swap.h"
 
-int	count_sent(char **mat)
+void	ft_frees(char **mat)
 {
 	int	i;
 
 	i = 0;
+	if (!mat[i])
+		return ;
 	while (mat[i])
-		i++;
-	i++;
-	return (i);
-}
-
-char	**ft_frees(char **mat)
-{
-	int	i;
-	int	j;
-
-	j = count_sent(mat);
-	i = 0;
-	while (i < j)
 	{
 		free(mat[i]);
 		i++;
 	}
 	free(mat);
-	return (NULL);
+}
+
+int	error_exit(int ret)
+{
+	write(2, "Error\n", 6);
+	return (ret);
 }

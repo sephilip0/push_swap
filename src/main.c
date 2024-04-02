@@ -21,10 +21,10 @@ int	main(int argc, char *argv[])
 	a = NULL;
 	b = NULL;
 	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		return (1);
+		return (error_exit(1));
 	error = ft_initstack_a(&a, argc, argv);
 	if (error)
-		return (1);
+		return (error_exit(1));
 	if (!stacksorted(a))
 	{
 		if (stacksize(a) <= 3)

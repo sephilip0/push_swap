@@ -27,7 +27,7 @@ int	appendstack(t_stack_node **stack, int n)
 	if (*stack == NULL)
 	{
 		*stack = new;
-		return (1);
+		return (0);
 	}
 	last = find_last(*stack);
 	last->next = new;
@@ -73,18 +73,4 @@ t_stack_node	*find_min(t_stack_node *stack)
 		stack = stack->next;
 	}
 	return (min);
-}
-
-void	printstack(t_stack_node *stack)
-{
-	while (stack != NULL)
-	{
-		printf("me: %p\n", stack);
-		printf("nbr: %d ", stack->nbr);
-		printf("index %d ", stack->index);
-		printf("above: %d ", stack->above_median);
-		printf("price: %d ", stack->push_cost);
-		printf("target: %p\n", stack->target_node);
-		stack = stack->next;
-	}
 }

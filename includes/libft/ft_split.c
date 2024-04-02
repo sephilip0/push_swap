@@ -96,20 +96,3 @@ char	**ft_split(char const *s, char c)
 	split[j] = 0;
 	return (split);
 }
-/*
-int	main()
-{
-	char	**mat;
-	int	i;
-
-	i = 0;
-	mat = ft_split("1 A  BB 1.23  CCC  33", ' ');
-	while (mat[i])
-	{
-		printf("%s\n", mat[i]);
-		i++;
-	}
-	free(mat);
-//	printf("%d\n", ft_countwords("    2 A.  ABC   A123 321    ", ' '));
-	return (0);
-}*/

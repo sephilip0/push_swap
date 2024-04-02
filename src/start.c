@@ -20,29 +20,25 @@ int	ft_initstack_a(t_stack_node **a, int argc, char *argv[])
 
 	mat = NULL;
 	error = 0;
-	if (argc == 2)
-	{
-		mat = new_split(argv[1], ' ');
-	//	if (!mat)
-		//	return (1);
-		error = veradd(a, mat, 1);
-	}
 	i = 2;
-	if (argc > 2)
+	while (i <= argc)
 	{
-		while (i < argc)
+		if (error == 1 || !*argv[i - 1] || 
+			new_countwords(argv[i - 1], ' ') == 0)
 		{
-			mat = new_split(argv[i - 1], ' ');	
-			error = veradd(a, mat, 0);
-			i++;
+			free_stack(a);
+			return (1);
 		}
+		mat = new_split(argv[i - 1], ' ');
+		if (!*mat)
+			error_stack(a, mat);
+		error = veradd(a, mat);
+		i++;
 	}
-	if (mat)
-		ft_frees(mat);
 	return (error);
 }
 
-int	veradd(t_stack_node **stack, char **nbr, int fr)
+int	veradd(t_stack_node **stack, char **nbr)
 {
 	long	a;
 	int		i;
@@ -55,18 +51,19 @@ int	veradd(t_stack_node **stack, char **nbr, int fr)
 	while (nbr[i])
 	{
 		if (!*nbr[i])
-			error_stack(stack, nbr, 0);
+			error_stack(stack, nbr);
 		a = ft_atol(nbr[i]);
 		if (a < -2147483648 || a > 2147483647)
-			error_stack(stack, nbr, fr);
+			error_stack(stack, nbr);
 		if (!instack(*stack, a))
-			appendstack(stack, a);
+			error = appendstack(stack, a);
 		else
-			error_stack(stack, nbr, fr);
-		if (error != 0)
-			return (1);
+			error_stack(stack, nbr);
+		if (error == 1)
+			error_stack(stack, nbr);
 		i++;
 	}
+	ft_frees(nbr);
 	return (0);
 }
 
@@ -106,11 +103,11 @@ void	free_stack(t_stack_node **stack)
 	*stack = 0;
 }
 
-void	error_stack(t_stack_node **stack, char **mat, int fr)
+void	error_stack(t_stack_node **stack, char **mat)
 {
 	if (*stack)
 		free_stack(stack);
-	if (fr)
+	if (*mat)
 		ft_frees(mat);
 	write(2, "Error\n", 6);
 	exit(1);
