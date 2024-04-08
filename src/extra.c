@@ -25,6 +25,8 @@ long	ft_atol(char *nbr)
 	{
 		if (nbr[i] == '-')
 			sig = -sig;
+		if (strlen(nbr) == 1)
+			return (10000000000);
 		i++;
 	}
 	while (nbr[i] >= 48 && nbr[i] <= 57)
