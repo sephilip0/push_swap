@@ -12,14 +12,12 @@
 
 #include "../includes/push_swap.h"
 
-long	ft_atol(const char *nptr)
+long	ft_atol(char *nbr)
 {
-	char	*nbr;
 	int		i;
 	long	res;
 	long	sig;
 
-	nbr = (char *)nptr;
 	i = 0;
 	res = 0;
 	sig = 1;
@@ -32,6 +30,8 @@ long	ft_atol(const char *nptr)
 	while (nbr[i] >= 48 && nbr[i] <= 57)
 	{
 		res = res * 10 + nbr[i] - 48;
+		if (res > INT_MAX || res < INT_MIN)
+			return (10000000000);
 		i++;
 	}
 	if (nbr[i] && (nbr[i] < 48 || nbr[i] > 57))

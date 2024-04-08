@@ -46,7 +46,7 @@ int				error_exit(int ret);
 int				instack(t_stack_node *stack, int nbr);
 int				stacksize(t_stack_node *stack);
 int				stacksorted(t_stack_node *stack);
-void			appendstack(t_stack_node **stack, int n);
+int				appendstack(t_stack_node **stack, int n);
 t_stack_node	*find_last(t_stack_node *stack);
 t_stack_node	*find_max(t_stack_node *stack);
 t_stack_node	*find_min(t_stack_node *stack);
@@ -85,7 +85,7 @@ char			**new_free(char **mat, int j);
 char			**new_split(char *s, char c);
 
 //EXTRA
-long			ft_atol(const char *nptr);
+long			ft_atol(char *nbr);
 int				ft_mod(int n);
 
 #endif // !
