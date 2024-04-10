@@ -32,7 +32,7 @@ long	ft_atol(char *nbr)
 	while (nbr[i] >= 48 && nbr[i] <= 57)
 	{
 		res = res * 10 + nbr[i] - 48;
-		if (res > INT_MAX || res < INT_MIN)
+		if ((res * sig) > INT_MAX || (res * sig) < INT_MIN)
 			return (10000000000);
 		i++;
 	}
@@ -41,7 +41,7 @@ long	ft_atol(char *nbr)
 	return (sig * res);
 }
 
-int	ft_mod(int n)
+long	ft_mod(long n)
 {
 	if (n < 0)
 		n *= -1;

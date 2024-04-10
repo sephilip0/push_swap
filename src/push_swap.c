@@ -75,7 +75,7 @@ void	set_target_h(t_stack_node *a, t_stack_node *b, long stksize)
 		b = tmp_b;
 		while (b)
 		{
-			dif2 = ft_mod(b->nbr - a->nbr);
+			dif2 = ft_mod((long)b->nbr - (long)a->nbr);
 			if ((b->nbr > a->nbr) && (dif > dif2))
 			{
 				a->target_node = b;

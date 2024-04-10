@@ -6,7 +6,7 @@
 /*   By: sephilip <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 15:35:57 by sephilip          #+#    #+#             */
-/*   Updated: 2024/04/01 16:04:46 by sephilip         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:29:03 by sephilip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,6 @@ char			**new_split(char *s, char c);
 
 //EXTRA
 long			ft_atol(char *nbr);
-int				ft_mod(int n);
+long			ft_mod(long n);
 
 #endif // !
